@@ -148,7 +148,7 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
 }
 .content-card-header h4 { margin: 0; }
 
-.btn-preskool {
+.btn-VidyaTrack {
     background: #6366f1;
     color: #fff;
     border: none;
@@ -160,14 +160,14 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
     align-items: center;
     gap: 6px;
 }
-.btn-preskool:hover { background: #4f46e5; color: #fff; }
+.btn-VidyaTrack:hover { background: #4f46e5; color: #fff; }
 
 /* Table */
-.preskool-table {
+.VidyaTrack-table {
     width: 100%;
     border-collapse: collapse;
 }
-.preskool-table th {
+.VidyaTrack-table th {
     text-align: left;
     padding: 12px 15px;
     background: #f8f9fc;
@@ -176,13 +176,13 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
     text-transform: uppercase;
     border-bottom: 1px solid #eee;
 }
-.preskool-table td {
+.VidyaTrack-table td {
     padding: 12px 15px;
     border-bottom: 1px solid #f0f0f0;
     font-size: 14px;
     color: #333;
 }
-.preskool-table tr:hover td { background: #fafaff; }
+.VidyaTrack-table tr:hover td { background: #fafaff; }
 
 .avatar-circle {
     width: 34px;
@@ -215,7 +215,7 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
 
 /* Form */
 .form-label { font-size: 13px; color: #555; font-weight: 500; margin-bottom: 6px; display: block; }
-.form-control-preskool {
+.form-control-VidyaTrack {
     width: 100%;
     padding: 10px 14px;
     border: 1px solid #e0e0e0;
@@ -223,7 +223,7 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
     font-size: 14px;
     margin-bottom: 18px;
 }
-.form-control-preskool:focus { outline: none; border-color: #6366f1; }
+.form-control-VidyaTrack:focus { outline: none; border-color: #6366f1; }
 .form-row { display: flex; gap: 20px; }
 .form-row > div { flex: 1; }
 
@@ -237,4 +237,4 @@ body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
     align-items: center;
 }
 .mb-4 { margin-bottom: 20px; }
-textarea.form-control-preskool { resize: vertical; }
+textarea.form-control-VidyaTrack { resize: vertical; }
