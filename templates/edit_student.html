@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Edit Student{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <h2>Edit Student</h2>
+    <p>Update student details</p>
+</div>
+
+<div class="content-card">
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="text" name="name" value="{{ student.name }}" class="form-control-VidyaTrack" required>
+
+    <input type="text" name="roll_number" value="{{ student.roll_number }}" class="form-control-VidyaTrack" required>
+
+    <input type="date" name="date_of_birth" value="{{ student.date_of_birth|date:'Y-m-d' }}" class="form-control-VidyaTrack">
+
+    <select name="gender" class="form-control-VidyaTrack">
+        <option value="Male" {% if student.gender == "Male" %}selected{% endif %}>Male</option>
+        <option value="Female" {% if student.gender == "Female" %}selected{% endif %}>Female</option>
+        <option value="Other" {% if student.gender == "Other" %}selected{% endif %}>Other</option>
+    </select>
+
+    <select name="blood_group" class="form-control-VidyaTrack">
+        <option value="A+" {% if student.blood_group == "A+" %}selected{% endif %}>A+</option>
+        <option value="A-" {% if student.blood_group == "A-" %}selected{% endif %}>A-</option>
+        <option value="B+" {% if student.blood_group == "B+" %}selected{% endif %}>B+</option>
+        <option value="B-" {% if student.blood_group == "B-" %}selected{% endif %}>B-</option>
+        <option value="O+" {% if student.blood_group == "O+" %}selected{% endif %}>O+</option>
+        <option value="O-" {% if student.blood_group == "O-" %}selected{% endif %}>O-</option>
+        <option value="AB+" {% if student.blood_group == "AB+" %}selected{% endif %}>AB+</option>
+        <option value="AB-" {% if student.blood_group == "AB-" %}selected{% endif %}>AB-</option>
+    </select>
+
+    <input type="file" name="photo" class="form-control-VidyaTrack" accept="image/*">
+    {% if student.photo %}
+        <p>Current photo: <img src="{{ student.photo.url }}" width="60"></p>
+    {% endif %}
+
+    <input type="text" name="course" value="{{ student.course }}" class="form-control-VidyaTrack" placeholder="e.g. B.Tech CSE" required>
+
+    <select name="department" class="form-control-VidyaTrack">
+        {% for dept in departments %}
+        <option value="{{ dept.id }}" {% if student.department_id == dept.id %}selected{% endif %}>{{ dept.name }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="date" name="admission_date" value="{{ student.admission_date|date:'Y-m-d' }}" class="form-control-VidyaTrack">
+
+    <input type="number" name="age" value="{{ student.age }}" class="form-control-VidyaTrack" required>
+
+    <input type="email" name="email" value="{{ student.email }}" class="form-control-VidyaTrack" required>
+
+    <input type="text" name="phone_number" value="{{ student.phone_number }}" class="form-control-VidyaTrack">
+
+    <textarea name="address" class="form-control-VidyaTrack" rows="2">{{ student.address }}</textarea>
+
+    <input type="text" name="city" value="{{ student.city }}" class="form-control-VidyaTrack">
+    <input type="text" name="state" value="{{ student.state }}" class="form-control-VidyaTrack">
+    <input type="text" name="pincode" value="{{ student.pincode }}" class="form-control-VidyaTrack">
+
+    <input type="text" name="father_name" value="{{ student.father_name }}" class="form-control-VidyaTrack">
+    <input type="text" name="father_occupation" value="{{ student.father_occupation }}" class="form-control-VidyaTrack">
+    <input type="text" name="father_phone" value="{{ student.father_phone }}" class="form-control-VidyaTrack">
+
+    <input type="text" name="mother_name" value="{{ student.mother_name }}" class="form-control-VidyaTrack">
+    <input type="text" name="mother_occupation" value="{{ student.mother_occupation }}" class="form-control-VidyaTrack">
+    <input type="text" name="mother_phone" value="{{ student.mother_phone }}" class="form-control-VidyaTrack">
+
+    <input type="text" name="guardian_name" value="{{ student.guardian_name }}" class="form-control-VidyaTrack">
+    <input type="text" name="guardian_relation" value="{{ student.guardian_relation }}" class="form-control-VidyaTrack">
+    <input type="text" name="guardian_phone" value="{{ student.guardian_phone }}" class="form-control-VidyaTrack">
+
+    <button type="submit" class="btn-VidyaTrack">Update Student</button>
+    <a href="{% url 'student_list' %}" class="btn-VidyaTrack" style="background:#e0e0e0; color:#333; margin-left:10px;">Cancel</a>
+</form>
+</div>
+
+{% endblock %}
