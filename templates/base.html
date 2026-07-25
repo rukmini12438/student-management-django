@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}PreSkool{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fa-solid fa-graduation-cap"></i> PreSkool
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active"><a href="{% url 'dashboard' %}"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+
+                <li class="has-submenu">
+                    <a onclick="toggleSubmenu(this)"><span><i class="fa-solid fa-building"></i> Departments</span> <i class="fa-solid fa-chevron-right arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#">All Departments</a></li>
+                        <li><a href="#">Add Department</a></li>
+                    </ul>
+                </li>
+
+                <li class="has-submenu">
+                    <a onclick="toggleSubmenu(this)"><span><i class="fa-solid fa-book"></i> Subjects</span> <i class="fa-solid fa-chevron-right arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#">All Subjects</a></li>
+                        <li><a href="#">Add Subject</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-label">Management</li>
+
+                <li class="has-submenu">
+                    <a onclick="toggleSubmenu(this)"><span><i class="fa-solid fa-wallet"></i> Accounts</span> <i class="fa-solid fa-chevron-right arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#">Income</a></li>
+                        <li><a href="#">Expense</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#"><i class="fa-solid fa-umbrella-beach"></i> Holiday</a></li>
+
+                <li class="has-submenu">
+                    <a onclick="toggleSubmenu(this)"><span><i class="fa-solid fa-money-bill"></i> Fees</span> <i class="fa-solid fa-chevron-right arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#">Fees Group</a></li>
+                        <li><a href="#">Fees Type</a></li>
+                        <li><a href="#">Collect Fees</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#"><i class="fa-solid fa-file-lines"></i> Exam List</a></li>
+                <li><a href="#"><i class="fa-solid fa-calendar"></i> Events</a></li>
+                <li><a href="#"><i class="fa-solid fa-table"></i> Time Table</a></li>
+                <li><a href="#"><i class="fa-solid fa-book-open"></i> Library</a></li>
+
+                <li class="menu-label">Pages</li>
+
+                <li class="has-submenu">
+                    <a onclick="toggleSubmenu(this)"><span><i class="fa-solid fa-shield"></i> Authentication</span> <i class="fa-solid fa-chevron-right arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Register</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#"><i class="fa-solid fa-file"></i> Blank Page</a></li>
+
+                <li class="menu-label">Students</li>
+                <li><a href="{% url 'student_list' %}"><i class="fa-solid fa-user-graduate"></i> Student List</a></li>
+                <li><a href="{% url 'add_student' %}"><i class="fa-solid fa-user-plus"></i> Add Student</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Topbar -->
+            <div class="topbar">
+                <input type="text" class="form-control search-box" placeholder="Search here">
+                <div class="topbar-right">
+
+                    <div class="navbar-dropdown notif-icon-wrap" onclick="toggleDropdown(this)">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notif-badge">3</span>
+                        <div class="navbar-dropdown-menu">
+                            <div class="dropdown-header">Notifications</div>
+                            <a href="#">New student registered</a>
+                            <a href="#">Fee payment received</a>
+                            <a href="#">Holiday announced</a>
+                        </div>
+                    </div>
+
+                    <div class="navbar-dropdown admin-avatar" onclick="toggleDropdown(this)">
+                        <i class="fa-solid fa-user"></i>
+                        <div class="navbar-dropdown-menu">
+                            <div class="dropdown-header">Admin</div>
+                            <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
+                            <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+                            <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+    <script>
+        function toggleSubmenu(el) {
+            const li = el.parentElement;
+            document.querySelectorAll('.sidebar-menu li.has-submenu').forEach(item => {
+                if (item !== li) item.classList.remove('open');
+            });
+            li.classList.toggle('open');
+        }
+
+        function toggleDropdown(el) {
+            document.querySelectorAll('.navbar-dropdown').forEach(item => {
+                if (item !== el) item.classList.remove('open');
+            });
+            el.classList.toggle('open');
+        }
+
+        // Bahar click karne pe dropdown/submenu band ho jaye
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.navbar-dropdown')) {
+                document.querySelectorAll('.navbar-dropdown').forEach(item => item.classList.remove('open'));
+            }
+        });
+    </script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

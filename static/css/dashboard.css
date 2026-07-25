@@ -1,0 +1,240 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
+
+.sidebar {
+    width: 250px;
+    background: #fff;
+    height: 100vh;
+    padding: 20px 0;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+    position: fixed;
+    overflow-y: auto;
+}
+.sidebar-logo { font-size: 22px; font-weight: bold; padding: 0 20px 20px; color: #6366f1; }
+.sidebar-menu { list-style: none; padding: 0; margin: 0; }
+.sidebar-menu li a {
+    display: block; padding: 10px 20px; color: #555; text-decoration: none; font-size: 14px;
+}
+.sidebar-menu li a i { width: 20px; margin-right: 10px; }
+.sidebar-menu li.active a, .sidebar-menu li a:hover { background: #f0f0ff; color: #6366f1; border-left: 3px solid #6366f1; }
+.menu-label { padding: 15px 20px 5px; font-size: 11px; color: #aaa; text-transform: uppercase; }
+
+.main-content { margin-left: 250px; width: 100%; padding: 20px 30px; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.search-box { max-width: 300px; }
+.topbar-right { display: flex; align-items: center; gap: 20px; }
+.admin-avatar { width: 36px; height: 36px; border-radius: 50%; background: #6366f1; color: #fff; display: flex; align-items: center; justify-content: center; }
+
+.page-header h2 { margin: 0; }
+.page-header p { color: #888; }
+
+.stat-card {
+    border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 15px; color: #333; background: #fff;
+}
+.stat-card i { font-size: 28px; padding: 15px; border-radius: 10px; color: #fff; }
+.stat-card h3 { margin: 0; }
+.stat-card p { margin: 0; color: #666; }
+
+.bg-orange i { background: #f59e0b; } .bg-orange { border-left: 5px solid #f59e0b; }
+.bg-blue i { background: #3b82f6; } .bg-blue { border-left: 5px solid #3b82f6; }
+.bg-red i { background: #ef4444; } .bg-red { border-left: 5px solid #ef4444; }
+.bg-purple i { background: #8b5cf6; } .bg-purple { border-left: 5px solid #8b5cf6; }
+
+.chart-card { background: #fff; border-radius: 12px; padding: 20px; }
+
+/* Sidebar Submenu */
+.sidebar-menu li.has-submenu > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.sidebar-menu li.has-submenu > a .arrow {
+    transition: transform 0.2s ease;
+    font-size: 12px;
+}
+.sidebar-menu li.has-submenu.open > a .arrow {
+    transform: rotate(90deg);
+}
+.submenu {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    background: #fafafe;
+}
+.sidebar-menu li.has-submenu.open .submenu {
+    max-height: 400px;
+}
+.submenu li a {
+    padding: 8px 20px 8px 52px;
+    font-size: 13px;
+    color: #666;
+    display: block;
+    text-decoration: none;
+}
+.submenu li a:hover, .submenu li a.active {
+    color: #6366f1;
+    background: #f0f0ff;
+}
+
+/* Navbar Dropdown */
+.navbar-dropdown {
+    position: relative;
+}
+.navbar-dropdown-menu {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    min-width: 220px;
+    padding: 8px 0;
+    display: none;
+    z-index: 100;
+}
+.navbar-dropdown.open .navbar-dropdown-menu {
+    display: block;
+}
+.navbar-dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: #444;
+    text-decoration: none;
+    font-size: 14px;
+}
+.navbar-dropdown-menu a:hover {
+    background: #f5f5ff;
+    color: #6366f1;
+}
+.navbar-dropdown-menu .dropdown-header {
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 13px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 4px;
+}
+.notif-icon-wrap, .admin-avatar {
+    cursor: pointer;
+    position: relative;
+}
+.notif-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 10px;
+}
+
+/* Card wrapper for pages */
+.content-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.content-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.content-card-header h4 { margin: 0; }
+
+.btn-preskool {
+    background: #6366f1;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.btn-preskool:hover { background: #4f46e5; color: #fff; }
+
+/* Table */
+.preskool-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.preskool-table th {
+    text-align: left;
+    padding: 12px 15px;
+    background: #f8f9fc;
+    color: #666;
+    font-size: 13px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+}
+.preskool-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #333;
+}
+.preskool-table tr:hover td { background: #fafaff; }
+
+.avatar-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #6366f1;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+.student-name-cell { display: flex; align-items: center; }
+
+.badge-course {
+    background: #f0f0ff;
+    color: #6366f1;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
+
+/* Form */
+.form-label { font-size: 13px; color: #555; font-weight: 500; margin-bottom: 6px; display: block; }
+.form-control-preskool {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+.form-control-preskool:focus { outline: none; border-color: #6366f1; }
+.form-row { display: flex; gap: 20px; }
+.form-row > div { flex: 1; }
+
+.section-title {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mb-4 { margin-bottom: 20px; }
+textarea.form-control-preskool { resize: vertical; }

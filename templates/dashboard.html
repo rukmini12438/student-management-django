@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Welcome Admin!</h2>
+    <p>Dashboard</p>
+</div>
+
+<!-- Stat Cards -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="stat-card bg-orange">
+            <i class="fa-solid fa-user-graduate"></i>
+            <div>
+                <h3>{{ total_students }}</h3>
+                <p>Students</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card bg-blue">
+            <i class="fa-solid fa-crown"></i>
+            <div>
+                <h3>{{ total_awards }}+</h3>
+                <p>Awards</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card bg-red">
+            <i class="fa-solid fa-building"></i>
+            <div>
+                <h3>{{ total_departments }}+</h3>
+                <p>Department</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card bg-purple">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <div>
+                <h3>${{ total_revenue }}</h3>
+                <p>Revenue</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="chart-card">
+            <h5>Revenue</h5>
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="chart-card">
+            <h5>Number of Students</h5>
+            <canvas id="studentsChart"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+new Chart(document.getElementById('revenueChart'), {
+    type: 'line',
+    data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+        datasets: [
+            { label: 'Teachers', data: [40,55,80,50,60,45,55], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.15)', fill: true, tension: 0.4 },
+            { label: 'Students', data: [30,45,55,35,50,40,45], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.15)', fill: true, tension: 0.4 }
+        ]
+    }
+});
+
+new Chart(document.getElementById('studentsChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+        datasets: [
+            { label: 'Boys', data: [700,1100,1200,900,700,600,500], backgroundColor: '#3b82f6' },
+            { label: 'Girls', data: [400,500,600,500,300,300,200], backgroundColor: '#f59e0b' }
+        ]
+    },
+    options: { scales: { x: { stacked: true }, y: { stacked: true } } }
+});
+</script>
+{% endblock %}

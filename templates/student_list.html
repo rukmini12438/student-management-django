@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Students{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Students</h2>
+    <p>Manage all student records</p>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header">
+        <h4>All Students ({{ students|length }})</h4>
+        <a href="{% url 'add_student' %}" class="btn-preskool">
+            <i class="fa-solid fa-plus"></i> Add Student
+        </a>
+    </div>
+
+    {% if students %}
+    <table class="preskool-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Course</th>
+                <th>Age</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>
+                    <div class="student-name-cell">
+                        <div class="avatar-circle">{{ student.name|slice:":1"|upper }}</div>
+                        {{ student.name }}
+                    </div>
+                </td>
+                <td>{{ student.roll_number }}</td>
+                <td><span class="badge-course">{{ student.course }}</span></td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-user-graduate fa-2x mb-3"></i>
+        <p>Koi student add nahi hua abhi tak.</p>
+        <a href="{% url 'add_student' %}" class="btn-preskool">Add your first student</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
