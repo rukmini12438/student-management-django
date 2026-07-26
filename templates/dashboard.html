@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Dashboard{% endblock %}
-
 {% block content %}
 <div class="page-header">
     <h2>Welcome Admin!</h2>
     <p>Dashboard</p>
 </div>
-
 <!-- Stat Cards -->
 <div class="row g-3 mb-4">
     <div class="col-md-3">
@@ -47,7 +45,6 @@
         </div>
     </div>
 </div>
-
 <!-- Charts -->
 <div class="row g-3">
     <div class="col-md-6">
@@ -64,16 +61,25 @@
     </div>
 </div>
 {% endblock %}
-
 {% block scripts %}
+
+{{ chart_labels|json_script:"chart-labels" }}
+{{ revenue_data|json_script:"revenue-data" }}
+{{ boys_data|json_script:"boys-data" }}
+{{ girls_data|json_script:"girls-data" }}
+
 <script>
+const chartLabels = JSON.parse(document.getElementById('chart-labels').textContent);
+const revenueData = JSON.parse(document.getElementById('revenue-data').textContent);
+const boysData = JSON.parse(document.getElementById('boys-data').textContent);
+const girlsData = JSON.parse(document.getElementById('girls-data').textContent);
+
 new Chart(document.getElementById('revenueChart'), {
     type: 'line',
     data: {
-        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+        labels: chartLabels,
         datasets: [
-            { label: 'Teachers', data: [40,55,80,50,60,45,55], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.15)', fill: true, tension: 0.4 },
-            { label: 'Students', data: [30,45,55,35,50,40,45], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.15)', fill: true, tension: 0.4 }
+            { label: 'Fees Collected (₹)', data: revenueData, borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.15)', fill: true, tension: 0.4 }
         ]
     }
 });
@@ -81,14 +87,13 @@ new Chart(document.getElementById('revenueChart'), {
 new Chart(document.getElementById('studentsChart'), {
     type: 'bar',
     data: {
-        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+        labels: chartLabels,
         datasets: [
-            { label: 'Boys', data: [700,1100,1200,900,700,600,500], backgroundColor: '#3b82f6' },
-            { label: 'Girls', data: [400,500,600,500,300,300,200], backgroundColor: '#f59e0b' }
+            { label: 'Boys', data: boysData, backgroundColor: '#3b82f6' },
+            { label: 'Girls', data: girlsData, backgroundColor: '#f59e0b' }
         ]
     },
-    options: { scales: { x: { stacked: true }, y: { stacked: true } } }
+    options: { scales: { x: { stacked: true }, y: { stacked: true } }}
 });
 </script>
 {% endblock %}
-

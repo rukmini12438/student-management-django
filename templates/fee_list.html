@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Fees{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <h2>Fees</h2>
+    <p>Manage student fee records</p>
+</div>
+
+<div style="display:flex; gap:20px; margin-bottom:20px;">
+    <div class="content-card" style="flex:1;">
+        <h4>{{ total_pending }}</h4>
+        <p>Pending Fees</p>
+    </div>
+    <div class="content-card" style="flex:1;">
+        <h4>₹{{ total_collected }}</h4>
+        <p>Total Collected</p>
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="content-card-header">
+        <h4>All Fee Records ({{ fees|length }})</h4>
+        <a href="{% url 'add_fee' %}" class="btn-VidyaTrack">
+            <i class="fa-solid fa-plus"></i> Add Fee
+        </a>
+    </div>
+
+    {% if fees %}
+    <table class="VidyaTrack-table">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Fee Type</th>
+                <th>Amount</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fee in fees %}
+            <tr>
+                <td>{{ fee.student.name }}</td>
+                <td>{{ fee.fee_type }}</td>
+                <td>₹{{ fee.amount }}</td>
+                <td>{{ fee.due_date }}</td>
+                <td>
+                    {% if fee.status == 'paid' %}
+                        <span style="color:green; font-weight:600;">Paid</span>
+                    {% elif fee.status == 'overdue' %}
+                        <span style="color:orange; font-weight:600;">Overdue</span>
+                    {% else %}
+                        <span style="color:#dc3545; font-weight:600;">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if fee.status == 'paid' %}
+                        Paid on {{ fee.paid_date }}
+                    {% else %}
+                        <a href="{% url 'mark_fee_paid' fee.id %}" class="btn-VidyaTrack">Mark Paid</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <p>No fee records yet.</p>
+        <a href="{% url 'add_fee' %}" class="btn-VidyaTrack">Add your first fee record</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

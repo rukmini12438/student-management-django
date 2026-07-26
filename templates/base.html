@@ -46,14 +46,7 @@
 
                 <li><a href="#"><i class="fa-solid fa-umbrella-beach"></i> Holiday</a></li>
 
-                <li class="has-submenu">
-                    <a onclick="toggleSubmenu(this)"><span><i class="fa-solid fa-money-bill"></i> Fees</span> <i class="fa-solid fa-chevron-right arrow"></i></a>
-                    <ul class="submenu">
-                        <li><a href="#">Fees Group</a></li>
-                        <li><a href="#">Fees Type</a></li>
-                        <li><a href="#">Collect Fees</a></li>
-                    </ul>
-                </li>
+                <li><a href="{% url 'fee_list' %}"><i class="fa-solid fa-money-bill"></i> Fees</a></li>
 
                 <li><a href="#"><i class="fa-solid fa-file-lines"></i> Exam List</a></li>
                 <li><a href="#"><i class="fa-solid fa-calendar"></i> Events</a></li>
@@ -61,14 +54,6 @@
                 <li><a href="#"><i class="fa-solid fa-book-open"></i> Library</a></li>
 
                 <li class="menu-label">Pages</li>
-
-                <li class="has-submenu">
-                    <a onclick="toggleSubmenu(this)"><span><i class="fa-solid fa-shield"></i> Authentication</span> <i class="fa-solid fa-chevron-right arrow"></i></a>
-                    <ul class="submenu">
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Register</a></li>
-                    </ul>
-                </li>
 
                 <li><a href="#"><i class="fa-solid fa-file"></i> Blank Page</a></li>
 
@@ -102,7 +87,7 @@
                             <div class="dropdown-header">Admin</div>
                             <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
                             <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
-                            <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                            <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                         </div>
                     </div>
 
@@ -132,7 +117,6 @@
             el.classList.toggle('open');
         }
 
-        // Bahar click karne pe dropdown/submenu band ho jaye
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.navbar-dropdown')) {
                 document.querySelectorAll('.navbar-dropdown').forEach(item => item.classList.remove('open'));
